@@ -27,7 +27,7 @@
         <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
         <script src="https://preview.babylonjs.com/babylon.max.js"></script>
     </head>
-    <body>
+    <body onkeydown="moveCamera(event)">
         <div id="fps">0 fps</div>
         <canvas id="canvas"></canvas>
         
@@ -36,6 +36,25 @@
                 var canvas = document.getElementById("canvas");
                 var fps = document.getElementById("fps");
                 var engine = new BABYLON.Engine(canvas);
+                var x=0;
+                var y=0;
+                var z=-10;
+                
+                function moveCamera(event) {
+                    var key = event.keyCode;
+                    if (key == 119) {
+                        x += 1; // W
+                    }
+                    else if (key == 97) {
+                        y -= 1; // A
+                    }
+                    else if (key == 115) {
+                        x -= 1 // S
+                    }
+                    else if (key == 100) {
+                        y += 1; // D
+                    }
+                }
                 
                 var createFps = function() {
                     fps.innerHTML = engine.getFps().toFixed() + " fps";
@@ -44,7 +63,7 @@
                 var createScene = function() {
                     var scene = new BABYLON.Scene(engine);
                     scene.clearColor = new BABYLON.Color3(0.8,0.8,0.8);
-                    var camera = new BABYLON.FreeCamera("camera",new BABYLON.Vector3(0,0,-10),scene);
+                    var camera = new BABYLON.FreeCamera("camera",new BABYLON.Vector3(x,y,z),scene);
                     var light = new BABYLON.PointLight("light",new BABYLON.Vector3(10,10,0),scene);
 
                     var box = BABYLON.Mesh.CreateBox("box",2,scene);
