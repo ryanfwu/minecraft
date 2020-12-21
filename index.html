@@ -27,9 +27,9 @@
         <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
         <script src="https://preview.babylonjs.com/babylon.max.js"></script>
     </head>
-    <body>
+    <body onclick="this.requestPointerLock();">
         <div id="fps">0 fps</div>
-        <canvas id="canvas" onclick="this.requestPointerLock();"></canvas>
+        <canvas id="canvas"></canvas>
         
         <script>
             window.addEventListener("DOMContentLoaded",function() {
