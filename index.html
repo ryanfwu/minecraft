@@ -44,12 +44,16 @@
                 var isAPressed = false;
                 var isSPressed = false;
                 var isDPressed = false;
+                var isSpacePressed = false;
+                var isShiftPressed = false;
 
                 document.addEventListener('keydown', (e) => {
                     if (e.keyCode == 87) { isWPressed = true; }
                     if (e.keyCode == 65) { isAPressed = true; }
                     if (e.keyCode == 83) { isSPressed = true; }
                     if (e.keyCode == 68) { isDPressed = true; }
+                    if (e.keyCode == 32) { isSpacePressed = true; }
+                    if (e.keyCode == 16) { isShiftPressed = true; }
                 });
 
                 document.addEventListener('keyup', (e) => {
@@ -57,6 +61,8 @@
                     if (e.keyCode == 65) { isAPressed = false; }
                     if (e.keyCode == 83) { isSPressed = false; }
                     if (e.keyCode == 68) { isDPressed = false; }
+                    if (e.keyCode == 32) { isSpacePressed = false; }
+                    if (e.keyCode == 16) { isShiftPressed = false; }
                 });
                 
                 var createFps = function() {
@@ -70,8 +76,6 @@
                     var light = new BABYLON.PointLight("light",new BABYLON.Vector3(10,10,0),scene);
 
                     var box = BABYLON.Mesh.CreateBox("box",2,scene);
-                    box.rotation.x = -0.2;
-                    box.rotation.y = -0.4;
 
                     var boxMaterial = new BABYLON.StandardMaterial("material",scene);
                     boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
@@ -88,6 +92,12 @@
                     }
                     if (isDPressed == true) {
                         x += 0.1;
+                    }
+                    if (isSpacePressed = true) {
+                        y += 0.1;
+                    }
+                    if (isShiftPressed = true) {
+                        y -= 0.1;
                     }
                     
                     return scene;
