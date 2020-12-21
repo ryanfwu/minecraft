@@ -27,7 +27,7 @@
         <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
         <script src="https://preview.babylonjs.com/babylon.max.js"></script>
     </head>
-    <body onkeydown="moveCamera(event)">
+    <body>
         <div id="fps">0 fps</div>
         <canvas id="canvas"></canvas>
         
@@ -40,21 +40,24 @@
                 var y=0;
                 var z=-10;
                 
-                function moveCamera(event) {
-                    var key = event.keyCode;
-                    if (key == 119) {
-                        x += 1; // W
-                    }
-                    else if (key == 97) {
-                        y -= 1; // A
-                    }
-                    else if (key == 115) {
-                        x -= 1 // S
-                    }
-                    else if (key == 100) {
-                        y += 1; // D
-                    }
-                }
+                var isWPressed = false;
+                var isAPressed = false;
+                var isSPressed = false;
+                var isDPressed = false;
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.keyCode == 87) { isWPressed = true; }
+                    if (e.keyCode == 65) { isAPressed = true; }
+                    if (e.keyCode == 83) { isSPressed = true; }
+                    if (e.keyCode == 68) { isDPressed = true; }
+                });
+
+                document.addEventListener('keyup', (e) => {
+                    if (e.keyCode == 87) { isWPressed = false; }
+                    if (e.keyCode == 65) { isAPressed = false; }
+                    if (e.keyCode == 83) { isSPressed = false; }
+                    if (e.keyCode == 68) { isDPressed = false; }
+                });
                 
                 var createFps = function() {
                     fps.innerHTML = engine.getFps().toFixed() + " fps";
@@ -73,6 +76,19 @@
                     var boxMaterial = new BABYLON.StandardMaterial("material",scene);
                     boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
                     box.material = boxMaterial;
+                    
+                    if (isWPressed == true) {
+                        x += 0.1;
+                    }
+                    if (isAPressed == true) {
+                        y -= 0.1;
+                    }
+                    if (isSPressed == true) {
+                        x -= 0.1;
+                    }
+                    if (isDPressed == true) {
+                        y += 0.1;
+                    }
                     
                     return scene;
                 }
