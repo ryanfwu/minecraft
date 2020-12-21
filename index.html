@@ -34,8 +34,12 @@
         <script>
             window.addEventListener("DOMContentLoaded",function() {
                 var canvas = document.getElementById("canvas");
-				var fps = document.getElementById("fps");
+                var fps = document.getElementById("fps");
                 var engine = new BABYLON.Engine(canvas);
+                
+                var createFps = function() {
+                    fps.innerHTML = engine.getFps().toFixed() + " fps";
+                }
                 
                 var createScene = function() {
                     var scene = new BABYLON.Scene(engine);
@@ -50,18 +54,18 @@
                     var boxMaterial = new BABYLON.StandardMaterial("material",scene);
                     boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
                     box.material = boxMaterial;
-			
-                    fps.innerHTML = engine.getFps().toFixed() + " fps";
-
+                    
                     return scene;
                 }
 
                 engine.runRenderLoop(function() {
                     createScene().render();
                 });
+                
+                SetInterval(createFps,500);
 
                 window.addEventListener('resize',function(){
-	                engine.resize();
+                    engine.resize();
                 });
             });
         </script>
