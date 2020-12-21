@@ -89,7 +89,7 @@
                 }
                 
                 var createCoords = function() {
-                    coords.innerHTML = round(x) + " / " + round(y) + " / " + round(z);
+                    coords.innerHTML = (Math.round(10*x))/10 + " / " + (Math.round(10*y))/10 + " / " + (Math.round(10*z))/10;
                 }
                 
                 var createScene = function() {
