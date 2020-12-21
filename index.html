@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML5 Minecraft</title>
+        <link rel="icon" src="img/favicon.png" type="image/png">
+        <style>
+            html,body,canvas {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.max.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        
+        <script>
+            window.addEventListener("DOMContentLoaded",function() {
+                var canvas = document.getElementById("canvas");
+                var engine = new BABYLON.Engine(canvas);
+                
+                var createScene = function() {
+                    var scene = new BABYLON.Scene(engine);
+                    scene.clearColor = new BABYLON.Color3(0.8,0.8,0.8);
+                    var camera = new BABYLON.FreeCamera("camera",new BABYLON.Vector3(0,0,-10),scene);
+                    var light = new BABYLON.PointLight("light",new BABYLON.Vector3(10,10,0),scene);
+
+                    var box = BABYLON.Mesh.CreateBox("box",2,scene);
+                    box.rotation.x = -0.2;
+                    box.rotation.y = -0.4;
+
+                    var boxMaterial = new BABYLON.StandardMaterial("material",scene);
+                    boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
+                    box.material = boxMaterial;
+
+                    return scene;
+                }
+
+                engine.runRenderLoop(function() {
+                    createScene().render();
+                });
+            });
+        </script>
+    </body>
+</html>
