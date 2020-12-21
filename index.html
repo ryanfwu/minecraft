@@ -11,24 +11,24 @@
                 width: 100%;
                 height: 100%;
             }
-			#fps {
-                position: absolute;
-                background-color: black;
-                border: 2px solid red;
-                text-align: center;
-                font-size: 16px;
-                color: white;
-                top: 15px;
-                right: 10px;
-                width: 60px;
-                height: 20px;
-            }
+        #fps {
+            position: absolute;
+            background-color: black;
+            border: 2px solid red;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            top: 15px;
+            right: 10px;
+            width: 60px;
+            height: 20px;
+        }
         </style>
         <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
         <script src="https://preview.babylonjs.com/babylon.max.js"></script>
     </head>
     <body>
-		<div id="fps">0 fps</div>
+        <div id="fps">0 fps</div>
         <canvas id="canvas"></canvas>
         
         <script>
@@ -51,7 +51,7 @@
                     boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
                     box.material = boxMaterial;
 			
-					fps.innerHTML = engine.getFps().toFixed() + " fps";
+                    fps.innerHTML = engine.getFps().toFixed() + " fps";
 
                     return scene;
                 }
