@@ -28,13 +28,9 @@
         <script src="https://preview.babylonjs.com/babylon.max.js"></script>
     </head>
     <body onclick="this.requestPointerLock();">
-        <div id="fps">0 fps</div>
+        <div id="fps">60 fps</div>
         <div id="game">
             <canvas id="canvas"></canvas>
-        </div>
-        
-        <div id="esc">
-            <h1>Press [ESC] to return to game</h1>
         </div>
         
         <script>
@@ -52,7 +48,6 @@
                 var isDPressed = false;
                 var isSpacePressed = false;
                 var isShiftPressed = false;
-                var escape = false;
                 
                 canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
                 canvas.requestPointerLock()
@@ -64,7 +59,6 @@
                     if (e.keyCode == 68) { isDPressed = true; }
                     if (e.keyCode == 32) { isSpacePressed = true; }
                     if (e.keyCode == 16) { isShiftPressed = true; }
-                    if (e.keyCode == 27) { if (esc == true) { esc = false } else { esc = true } }
                 });
 
                 document.addEventListener('keyup', (e) => {
@@ -109,13 +103,6 @@
                     }
                     if (isShiftPressed == true) {
                         y -= 0.1;
-                    }
-                    
-                    if (escape == true) {
-                        document.getElementById("esc").style.display = "block";
-                    }
-                    else {
-                        document.getElementById("esc").style.display = "none";
                     }
                     
                     return scene;
