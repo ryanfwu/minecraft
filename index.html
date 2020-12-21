@@ -78,16 +78,16 @@
                     box.material = boxMaterial;
                     
                     if (isWPressed == true) {
-                        x += 0.1;
+                        z += 0.1;
                     }
                     if (isAPressed == true) {
-                        y -= 0.1;
-                    }
-                    if (isSPressed == true) {
                         x -= 0.1;
                     }
+                    if (isSPressed == true) {
+                        z -= 0.1;
+                    }
                     if (isDPressed == true) {
-                        y += 0.1;
+                        x += 0.1;
                     }
                     
                     return scene;
