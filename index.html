@@ -46,6 +46,9 @@
                 var isDPressed = false;
                 var isSpacePressed = false;
                 var isShiftPressed = false;
+                
+                canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+                canvas.requestPointerLock()
 
                 document.addEventListener('keydown', (e) => {
                     if (e.keyCode == 87) { isWPressed = true; }
