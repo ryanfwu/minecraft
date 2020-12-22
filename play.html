@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML5 Minecraft</title>
+        <link rel="icon" src="./img/favicon.png" type="image/png">
+        <style>
+            html,body,canvas {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+        #fps {
+            position: absolute;
+            background-color: white;
+            border: 2px solid blue;
+            text-align: center;
+            font-size: 16px;
+            color: black;
+            top: 15px;
+            right: 10px;
+            width: 60px;
+            height: 20px;
+        }
+        #coords {
+            position: absolute;
+            background-color: white;
+            border: 2px solid blue;
+            text-align: center;
+            font-size: 14px;
+            color: black;
+            top: 15px;
+            left: 10px;
+            width: 120px;
+            height: 20px;
+        }
+        </style>
+        <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.max.js"></script>
+    </head>
+    <body>
+        <div id="fps">60 fps</div>
+        <div id="coords">0 / 0 / 0</div>
+        <div id="game">
+            <canvas id="canvas" onclick="this.requestPointerLock()"></canvas>
+        </div>
+        
+        <script>
+            window.addEventListener("DOMContentLoaded",function() {
+                var canvas = document.getElementById("canvas");
+                var fps = document.getElementById("fps");
+                var coords = document.getElementById("coords");
+                var engine = new BABYLON.Engine(canvas);
+                var x=0;
+                var y=0;
+                var z=-10;
+                
+                canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+                canvas.requestPointerLock();
+                
+                var createFps = function() {
+                    fps.innerHTML = engine.getFps().toFixed() + " fps";
+                }
+                
+                var createCoords = function() {
+                    coords.innerHTML = (Math.round(10*x))/10 + " / " + (Math.round(10*y))/10 + " / " + (Math.round(10*z))/10;
+                }
+                
+                var createScene = function() {
+                    var scene = new BABYLON.Scene(engine);
+                    scene.clearColor = new BABYLON.Color3(0.529,0.808,0.922);
+                    
+                    var camera = new BABYLON.UniversalCamera("camera",new BABYLON.Vector3(x,y,z),scene);
+                    var gravity = -9.81;
+                    camera.applyGravity = true;
+                    camera.ellipsoid = new BABYLON.Vector3(1,1,1);
+                    scene.collisionsEnabled = true;
+                    camera.checkCollisions = true;
+                    
+                    var light = new BABYLON.PointLight("light",new BABYLON.Vector3(10,10,0),scene);
+
+                    var box = BABYLON.Mesh.CreateBox("box",2,scene);
+                    box.checkCollisions = true;
+                    
+                    var boxMaterial = new BABYLON.StandardMaterial("material",scene);
+                    boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
+                    box.material = boxMaterial;
+                    
+                    return scene;
+                }
+
+                engine.runRenderLoop(function() {
+                    createScene().render();
+                });
+                
+                setInterval(function() {
+                    createFps();
+                    createCoords();
+                },50);
+
+                window.addEventListener('resize',function(){
+                    engine.resize();
+                });
+            });
+        </script>
+    </body>
+</html>
