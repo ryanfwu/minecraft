@@ -95,11 +95,18 @@
                 var createScene = function() {
                     var scene = new BABYLON.Scene(engine);
                     scene.clearColor = new BABYLON.Color3(0.529,0.808,0.922);
-                    var camera = new BABYLON.FreeCamera("camera",new BABYLON.Vector3(x,y,z),scene);
+                    
+                    var camera = new BABYLON.UniversalCamera("camera",new BABYLON.Vector3(x,y,z),scene);
+                    var gravity = -9.81;
+                    camera.applyGravity = true;
+                    camera.ellipsoid = new BABYLON.Vector3(1,1,1);
+                    scene.collisionsEnabled = true;
+                    camera.checkCollisions = true;
+                    
                     var light = new BABYLON.PointLight("light",new BABYLON.Vector3(10,10,0),scene);
 
                     var box = BABYLON.Mesh.CreateBox("box",2,scene);
-
+                    box.checkCollisions = true;
                     var boxMaterial = new BABYLON.StandardMaterial("material",scene);
                     boxMaterial.emissiveColor = new BABYLON.Color3(0,0.58,0.86);
                     box.material = boxMaterial;
