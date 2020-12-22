@@ -70,16 +70,20 @@
                     var scene = new BABYLON.Scene(engine);
                     scene.clearColor = new BABYLON.Color3(0.529,0.808,0.922);
 
-                    var camera = new BABYLON.FreeCamera("camera1",new BABYLON.Vector3(x,y,z),scene);
+                    var camera = new BABYLON.FreeCamera("camera",new BABYLON.Vector3(x,y,z),scene);
                     camera.setTarget(BABYLON.Vector3.Zero());
-                    camera.attachControl(canvas,true);
+                    camera.attachControl(canvas);
                     
                     var light = new BABYLON.HemisphericLight("light",new BABYLON.Vector3(0,1,0),scene);
 
                     var sphere = BABYLON.MeshBuilder.CreateSphere("sphere",{diameter:2,segments:32},scene);
                     sphere.position.y = 1;
+                    var sphereMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
+                    sphereMaterial.specularColor = new BABYLON.Color3(0,0,1);
                     
                     var ground = BABYLON.MeshBuilder.CreateGround("ground",{width:500,height:500},scene);
+                    var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
+                    groundMaterial.specularColor = new BABYLON.Color3(0,1,0);
 
                     return scene;
                 };
